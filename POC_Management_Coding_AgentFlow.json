@@ -1,0 +1,1739 @@
+{
+  "nodes": [
+    {
+      "id": "startAgentflow_0",
+      "type": "agentFlow",
+      "position": {
+        "x": -260,
+        "y": 90
+      },
+      "data": {
+        "id": "startAgentflow_0",
+        "label": "Start",
+        "version": 1.1,
+        "name": "startAgentflow",
+        "type": "Start",
+        "color": "#7EE787",
+        "hideInput": true,
+        "baseClasses": [
+          "Start"
+        ],
+        "category": "Agent Flows",
+        "description": "Starting point of the agentflow",
+        "inputParams": [
+          {
+            "label": "Input Type",
+            "name": "startInputType",
+            "type": "options",
+            "options": [
+              {
+                "label": "Chat Input",
+                "name": "chatInput",
+                "description": "Start the conversation with chat input"
+              },
+              {
+                "label": "Form Input",
+                "name": "formInput",
+                "description": "Start the workflow with form inputs"
+              }
+            ],
+            "default": "formInput",
+            "id": "startAgentflow_0-input-startInputType-options",
+            "display": true
+          },
+          {
+            "label": "Form Title",
+            "name": "formTitle",
+            "type": "string",
+            "placeholder": "Please Fill Out The Form",
+            "show": {
+              "startInputType": "formInput"
+            },
+            "id": "startAgentflow_0-input-formTitle-string",
+            "display": true
+          },
+          {
+            "label": "Form Description",
+            "name": "formDescription",
+            "type": "string",
+            "placeholder": "Complete all fields below to continue",
+            "show": {
+              "startInputType": "formInput"
+            },
+            "id": "startAgentflow_0-input-formDescription-string",
+            "display": true
+          },
+          {
+            "label": "Form Input Types",
+            "name": "formInputTypes",
+            "description": "Specify the type of form input",
+            "type": "array",
+            "show": {
+              "startInputType": "formInput"
+            },
+            "array": [
+              {
+                "label": "Type",
+                "name": "type",
+                "type": "options",
+                "options": [
+                  {
+                    "label": "String",
+                    "name": "string"
+                  },
+                  {
+                    "label": "Number",
+                    "name": "number"
+                  },
+                  {
+                    "label": "Boolean",
+                    "name": "boolean"
+                  },
+                  {
+                    "label": "Options",
+                    "name": "options"
+                  }
+                ],
+                "default": "string"
+              },
+              {
+                "label": "Label",
+                "name": "label",
+                "type": "string",
+                "placeholder": "Label for the input"
+              },
+              {
+                "label": "Variable Name",
+                "name": "name",
+                "type": "string",
+                "placeholder": "Variable name for the input (must be camel case)",
+                "description": "Variable name must be camel case. For example: pocName, scope, etc."
+              },
+              {
+                "label": "Add Options",
+                "name": "addOptions",
+                "type": "array",
+                "show": {
+                  "formInputTypes[$index].type": "options"
+                },
+                "array": [
+                  {
+                    "label": "Option",
+                    "name": "option",
+                    "type": "string"
+                  }
+                ]
+              }
+            ],
+            "id": "startAgentflow_0-input-formInputTypes-array",
+            "display": true
+          },
+          {
+            "label": "Ephemeral Memory",
+            "name": "startEphemeralMemory",
+            "type": "boolean",
+            "description": "Start fresh for every execution without past chat history",
+            "optional": true
+          },
+          {
+            "label": "Flow State",
+            "name": "startState",
+            "description": "Runtime state during the execution of the workflow",
+            "type": "array",
+            "optional": true,
+            "array": [
+              {
+                "label": "Key",
+                "name": "key",
+                "type": "string",
+                "placeholder": "Foo"
+              },
+              {
+                "label": "Value",
+                "name": "value",
+                "type": "string",
+                "placeholder": "Bar"
+              }
+            ],
+            "id": "startAgentflow_0-input-startState-array",
+            "display": true
+          },
+          {
+            "label": "Persist State",
+            "name": "startPersistState",
+            "type": "boolean",
+            "description": "Persist the state in the same session",
+            "optional": true,
+            "id": "startAgentflow_0-input-startPersistState-boolean",
+            "display": true
+          }
+        ],
+        "inputAnchors": [],
+        "inputs": {
+          "startInputType": "formInput",
+          "formTitle": "Technical POC Management System",
+          "formDescription": "A multi-agent system for managing Proof of Concept projects. Enter the POC details and the system will orchestrate planning, execution, validation, and monitoring.",
+          "formInputTypes": [
+            {
+              "type": "string",
+              "label": "POC Name",
+              "name": "pocName",
+              "addOptions": ""
+            },
+            {
+              "type": "string",
+              "label": "POC Objective",
+              "name": "pocObjective",
+              "addOptions": ""
+            },
+            {
+              "type": "options",
+              "label": "POC Type",
+              "name": "pocType",
+              "addOptions": [
+                {
+                  "option": "Finance System"
+                },
+                {
+                  "option": "ERP Module"
+                },
+                {
+                  "option": "Compliance Feature"
+                },
+                {
+                  "option": "Infrastructure"
+                },
+                {
+                  "option": "Other"
+                }
+              ]
+            },
+            {
+              "type": "string",
+              "label": "Stakeholders",
+              "name": "stakeholders",
+              "addOptions": ""
+            },
+            {
+              "type": "string",
+              "label": "Timeline (days)",
+              "name": "timeline",
+              "addOptions": ""
+            }
+          ],
+          "startState": [
+            {
+              "key": "pocStatus",
+              "value": "initialized"
+            },
+            {
+              "key": "findings",
+              "value": "[]"
+            },
+            {
+              "key": "validationResults",
+              "value": "\"\""
+            },
+            {
+              "key": "executionLog",
+              "value": "\"\""
+            }
+          ]
+        },
+        "outputAnchors": [
+          {
+            "id": "startAgentflow_0-output-startAgentflow",
+            "label": "Start",
+            "name": "startAgentflow"
+          }
+        ],
+        "outputs": {},
+        "selected": false
+      },
+      "width": 104,
+      "height": 66,
+      "selected": false,
+      "positionAbsolute": {
+        "x": -260,
+        "y": 90
+      },
+      "dragging": false
+    },
+    {
+      "id": "stickyNoteAgentflow_0",
+      "position": {
+        "x": -81.69045484935418,
+        "y": -67.11535249403475
+      },
+      "data": {
+        "id": "stickyNoteAgentflow_0",
+        "label": "Workflow Overview",
+        "version": 1,
+        "name": "stickyNoteAgentflow",
+        "type": "StickyNote",
+        "color": "#fee440",
+        "baseClasses": [
+          "StickyNote"
+        ],
+        "category": "Agent Flows",
+        "description": "Add notes to the agent flow",
+        "inputParams": [
+          {
+            "label": "",
+            "name": "note",
+            "type": "string",
+            "rows": 1,
+            "placeholder": "Type something here",
+            "optional": true,
+            "id": "stickyNoteAgentflow_0-input-note-string",
+            "display": true
+          }
+        ],
+        "inputAnchors": [],
+        "inputs": {
+          "note": "1\ufe0f\u20e3 Orchestrator decomposes POC into subtasks\n2\ufe0f\u20e3 Planner defines requirements & success criteria\n3\ufe0f\u20e3 Builder executes & tests\n4\ufe0f\u20e3 Validator checks quality & compliance\n5\ufe0f\u20e3 Monitor tracks progress\n6\ufe0f\u20e3 Error Handler manages exceptions"
+        },
+        "outputAnchors": [
+          {
+            "id": "stickyNoteAgentflow_0-output-stickyNoteAgentflow",
+            "label": "Sticky Note",
+            "name": "stickyNoteAgentflow"
+          }
+        ],
+        "outputs": {},
+        "selected": false
+      },
+      "type": "stickyNote",
+      "width": 204,
+      "height": 123,
+      "selected": false,
+      "positionAbsolute": {
+        "x": -81.69045484935418,
+        "y": -67.11535249403475
+      },
+      "dragging": false
+    },
+    {
+      "id": "llmAgentflow_0",
+      "position": {
+        "x": -110,
+        "y": 86
+      },
+      "data": {
+        "id": "llmAgentflow_0",
+        "label": "Orchestrator",
+        "version": 1,
+        "name": "llmAgentflow",
+        "type": "LLM",
+        "color": "#64B5F6",
+        "baseClasses": [
+          "LLM"
+        ],
+        "category": "Agent Flows",
+        "description": "Large language models to analyze user-provided inputs and generate responses",
+        "inputParams": [
+          {
+            "label": "Model",
+            "name": "llmModel",
+            "type": "asyncOptions",
+            "loadMethod": "listModels",
+            "loadConfig": true,
+            "id": "llmAgentflow_0-input-llmModel-asyncOptions",
+            "display": true
+          },
+          {
+            "label": "Messages",
+            "name": "llmMessages",
+            "type": "array",
+            "optional": true,
+            "acceptVariable": true,
+            "array": [
+              {
+                "label": "Role",
+                "name": "role",
+                "type": "options",
+                "options": [
+                  {
+                    "label": "System",
+                    "name": "system"
+                  },
+                  {
+                    "label": "Assistant",
+                    "name": "assistant"
+                  },
+                  {
+                    "label": "Developer",
+                    "name": "developer"
+                  },
+                  {
+                    "label": "User",
+                    "name": "user"
+                  }
+                ]
+              },
+              {
+                "label": "Content",
+                "name": "content",
+                "type": "string",
+                "acceptVariable": true,
+                "generateInstruction": true,
+                "rows": 4
+              }
+            ],
+            "id": "llmAgentflow_0-input-llmMessages-array",
+            "display": true
+          },
+          {
+            "label": "Enable Memory",
+            "name": "llmEnableMemory",
+            "type": "boolean",
+            "description": "Enable memory for the conversation thread",
+            "default": true,
+            "optional": true,
+            "id": "llmAgentflow_0-input-llmEnableMemory-boolean",
+            "display": true
+          },
+          {
+            "label": "Memory Type",
+            "name": "llmMemoryType",
+            "type": "options",
+            "options": [
+              {
+                "label": "All Messages",
+                "name": "allMessages"
+              },
+              {
+                "label": "Window Size",
+                "name": "windowSize"
+              },
+              {
+                "label": "Conversation Summary",
+                "name": "conversationSummary"
+              },
+              {
+                "label": "Conversation Summary Buffer",
+                "name": "conversationSummaryBuffer"
+              }
+            ],
+            "optional": true,
+            "default": "allMessages",
+            "show": {
+              "llmEnableMemory": true
+            },
+            "id": "llmAgentflow_0-input-llmMemoryType-options",
+            "display": true
+          },
+          {
+            "label": "Window Size",
+            "name": "llmMemoryWindowSize",
+            "type": "number",
+            "default": "20",
+            "description": "Uses a fixed window size to surface the last N messages",
+            "show": {
+              "llmMemoryType": "windowSize"
+            },
+            "id": "llmAgentflow_0-input-llmMemoryWindowSize-number",
+            "display": false
+          },
+          {
+            "label": "Max Token Limit",
+            "name": "llmMemoryMaxTokenLimit",
+            "type": "number",
+            "default": "2000",
+            "description": "Summarize conversations once token limit is reached. Default to 2000",
+            "show": {
+              "llmMemoryType": "conversationSummaryBuffer"
+            },
+            "id": "llmAgentflow_0-input-llmMemoryMaxTokenLimit-number",
+            "display": false
+          },
+          {
+            "label": "Input Message",
+            "name": "llmUserMessage",
+            "type": "string",
+            "description": "Add an input message as user message at the end of the conversation",
+            "rows": 4,
+            "optional": true,
+            "acceptVariable": true,
+            "show": {
+              "llmEnableMemory": true
+            },
+            "id": "llmAgentflow_0-input-llmUserMessage-string",
+            "display": true
+          },
+          {
+            "label": "Return Response As",
+            "name": "llmReturnResponseAs",
+            "type": "options",
+            "options": [
+              {
+                "label": "User Message",
+                "name": "userMessage"
+              },
+              {
+                "label": "Assistant Message",
+                "name": "assistantMessage"
+              }
+            ],
+            "default": "userMessage",
+            "id": "llmAgentflow_0-input-llmReturnResponseAs-options",
+            "display": true
+          },
+          {
+            "label": "JSON Structured Output",
+            "name": "llmStructuredOutput",
+            "description": "Instruct the LLM to give output in a JSON structured schema",
+            "type": "array",
+            "optional": true,
+            "acceptVariable": true,
+            "array": [
+              {
+                "label": "Key",
+                "name": "key",
+                "type": "string"
+              },
+              {
+                "label": "Type",
+                "name": "type",
+                "type": "options",
+                "options": [
+                  {
+                    "label": "String",
+                    "name": "string"
+                  },
+                  {
+                    "label": "String Array",
+                    "name": "stringArray"
+                  },
+                  {
+                    "label": "Number",
+                    "name": "number"
+                  },
+                  {
+                    "label": "Boolean",
+                    "name": "boolean"
+                  },
+                  {
+                    "label": "Enum",
+                    "name": "enum"
+                  },
+                  {
+                    "label": "JSON Array",
+                    "name": "jsonArray"
+                  }
+                ]
+              },
+              {
+                "label": "Enum Values",
+                "name": "enumValues",
+                "type": "string",
+                "placeholder": "value1, value2, value3",
+                "description": "Enum values. Separated by comma",
+                "optional": true,
+                "show": {
+                  "llmStructuredOutput[$index].type": "enum"
+                }
+              },
+              {
+                "label": "JSON Schema",
+                "name": "jsonSchema",
+                "type": "code",
+                "placeholder": "{\n    \"task\": {\n        \"type\": \"string\",\n        \"description\": \"Description of the task\"\n    }\n}",
+                "description": "JSON schema for the structured output",
+                "optional": true,
+                "show": {
+                  "llmStructuredOutput[$index].type": "jsonArray"
+                }
+              },
+              {
+                "label": "Description",
+                "name": "description",
+                "type": "string",
+                "placeholder": "Description of the key"
+              }
+            ],
+            "id": "llmAgentflow_0-input-llmStructuredOutput-array",
+            "display": true
+          },
+          {
+            "label": "Update Flow State",
+            "name": "llmUpdateState",
+            "description": "Update runtime state during the execution of the workflow",
+            "type": "array",
+            "optional": true,
+            "acceptVariable": true,
+            "array": [
+              {
+                "label": "Key",
+                "name": "key",
+                "type": "asyncOptions",
+                "loadMethod": "listRuntimeStateKeys",
+                "freeSolo": true
+              },
+              {
+                "label": "Value",
+                "name": "value",
+                "type": "string",
+                "acceptVariable": true,
+                "acceptNodeOutputAsVariable": true
+              }
+            ],
+            "id": "llmAgentflow_0-input-llmUpdateState-array",
+            "display": true
+          }
+        ],
+        "inputAnchors": [],
+        "inputs": {
+          "llmModel": "groqChat",
+          "llmMessages": [
+            {
+              "role": "system",
+              "content": "You are the Orchestrator Agent for a Technical POC Management system. Your role is to coordinate the entire POC workflow from planning to delivery.\n\nGiven a POC request, you must:\n\n1. Decompose the high-level POC objectives into clear, actionable subtasks\n2. Assign each subtask to the appropriate specialist agent (Planner, Builder, Validator, Monitor)\n3. Track progress and ensure dependencies are met\n4. Make decisions when agents disagree\n5. Aggregate results into a final POC deliverable\n\nAlways consider:\n\n- Requirements traceability\n- Risk assessment and mitigation\n- Stakeholder alignment\n- Success criteria validation\n- Audit compliance\n\nBreak down the POC into these phases:\n\n- Planning Phase: Requirements gathering, success criteria definition, risk assessment\n- Execution Phase: Code generation, experiment simulation, configuration validation\n- Validation Phase: Quality assurance, failure detection, audit validation\n- Monitoring Phase: Activity tracking, performance metrics, status reporting\n\nIf re-planning is needed (e.g., validation fails, requirements change), generate new tasks to address the gaps."
+            },
+            {
+              "role": "user",
+              "content": "POC Name: {{$form.pocName}}\n\nPOC Objective: {{$form.pocObjective}}\n\nPOC Type: {{$form.pocType}}\n\nStakeholders: {{$form.stakeholders}}\n\nTimeline: {{$form.timeline}} days\n\nCurrent Flow State:\n\n- pocStatus: {{$flow.state.pocStatus}}\n- findings: {{$flow.state.findings}}\n- validationResults: {{$flow.state.validationResults}}\n- executionLog: {{$flow.state.executionLog}}\n\nGenerate the initial set of subagent tasks based on this POC request. Each task must be specific, actionable, and include clear success criteria."
+            }
+          ],
+          "llmEnableMemory": true,
+          "llmReturnResponseAs": "userMessage",
+          "llmStructuredOutput": [
+            {
+              "key": "subagents",
+              "type": "jsonArray",
+              "enumValues": "",
+              "jsonSchema": "{\"agentType\": {\"type\": \"string\", \"description\": \"Type of agent: Planner, Builder, Validator, Monitor\"}, \"task\": {\"type\": \"string\", \"description\": \"The specific task for the subagent\"}, \"successCriteria\": {\"type\": \"string\", \"description\": \"Clear criteria to determine task completion\"}}",
+              "description": "A list of subagent tasks to execute"
+            },
+            {
+              "key": "pocPlan",
+              "type": "string",
+              "enumValues": "",
+              "jsonSchema": "",
+              "description": "A high-level plan summary for the POC"
+            }
+          ],
+          "llmUpdateState": [
+            {
+              "key": "subagents",
+              "value": "<p><span class=\"variable\" data-type=\"mention\" data-id=\"output.subagents\" data-label=\"output.subagents\" data-mention-suggestion-char=\"@\">{{ output.subagents }}</span></p>"
+            },
+            {
+              "key": "pocPlan",
+              "value": "<p><span class=\"variable\" data-type=\"mention\" data-id=\"output.pocPlan\" data-label=\"output.pocPlan\" data-mention-suggestion-char=\"@\">{{ output.pocPlan }}</span></p>"
+            },
+            {
+              "key": "pocStatus",
+              "value": "<p>planning</p>"
+            }
+          ],
+          "llmModelConfig": {
+            "credential": "",
+            "modelName": "llama-3.3-70b-versatile",
+            "temperature": "0.7",
+            "maxTokens": "",
+            "streaming": true,
+            "llmModel": "groqChat"
+          },
+          "llmUserMessage": "If $flow.state.findings already contains execution results, review them against the original POC objectives and validation criteria. Generate ONLY new, non-overlapping subagent tasks that fill remaining gaps (e.g., missing validation, incomplete features, unresolved risks). If this is the first pass, generate the initial set of subagent tasks as defined in your system prompt."
+        },
+        "outputAnchors": [
+          {
+            "id": "llmAgentflow_0-output-llmAgentflow",
+            "label": "LLM",
+            "name": "llmAgentflow"
+          }
+        ],
+        "outputs": {},
+        "selected": false
+      },
+      "type": "agentFlow",
+      "width": 237,
+      "height": 73,
+      "selected": false,
+      "positionAbsolute": {
+        "x": -110,
+        "y": 86
+      },
+      "dragging": false
+    },
+    {
+      "id": "iterationAgentflow_0",
+      "position": {
+        "x": 231.07385981801315,
+        "y": 31.955187094269604
+      },
+      "data": {
+        "id": "iterationAgentflow_0",
+        "label": "Execute SubAgents",
+        "version": 1,
+        "name": "iterationAgentflow",
+        "type": "Iteration",
+        "color": "#9C89B8",
+        "baseClasses": [
+          "Iteration"
+        ],
+        "category": "Agent Flows",
+        "description": "Execute the nodes within the iteration block through N iterations",
+        "inputParams": [
+          {
+            "label": "Array Input",
+            "name": "iterationInput",
+            "type": "string",
+            "description": "The input array to iterate over",
+            "acceptVariable": true,
+            "rows": 4,
+            "id": "iterationAgentflow_0-input-iterationInput-string",
+            "display": true
+          }
+        ],
+        "inputAnchors": [],
+        "inputs": {
+          "iterationInput": "<p><span class=\"variable\" data-type=\"mention\" data-id=\"$flow.state.subagents\" data-label=\"$flow.state.subagents\">{{ $flow.state.subagents }}</span> </p>"
+        },
+        "outputAnchors": [
+          {
+            "id": "iterationAgentflow_0-output-iterationAgentflow",
+            "label": "Iteration",
+            "name": "iterationAgentflow"
+          }
+        ],
+        "outputs": {},
+        "selected": false
+      },
+      "type": "iteration",
+      "width": 300,
+      "height": 250,
+      "selected": false,
+      "positionAbsolute": {
+        "x": 231.07385981801315,
+        "y": 31.955187094269604
+      },
+      "dragging": false
+    },
+    {
+      "id": "agentAgentflow_0",
+      "position": {
+        "x": 35.92946041169563,
+        "y": 73.2323651029239
+      },
+      "data": {
+        "id": "agentAgentflow_0",
+        "label": "Coding Agent",
+        "version": 1,
+        "name": "agentAgentflow",
+        "type": "Agent",
+        "color": "#4DD0E1",
+        "baseClasses": [
+          "Agent"
+        ],
+        "category": "Agent Flows",
+        "description": "Dynamically choose and utilize tools during runtime, enabling multi-step reasoning",
+        "inputParams": [
+          {
+            "label": "Model",
+            "name": "agentModel",
+            "type": "asyncOptions",
+            "loadMethod": "listModels",
+            "loadConfig": true,
+            "id": "agentAgentflow_0-input-agentModel-asyncOptions",
+            "display": true
+          },
+          {
+            "label": "Messages",
+            "name": "agentMessages",
+            "type": "array",
+            "optional": true,
+            "acceptVariable": true,
+            "array": [
+              {
+                "label": "Role",
+                "name": "role",
+                "type": "options",
+                "options": [
+                  {
+                    "label": "System",
+                    "name": "system"
+                  },
+                  {
+                    "label": "Assistant",
+                    "name": "assistant"
+                  },
+                  {
+                    "label": "Developer",
+                    "name": "developer"
+                  },
+                  {
+                    "label": "User",
+                    "name": "user"
+                  }
+                ]
+              },
+              {
+                "label": "Content",
+                "name": "content",
+                "type": "string",
+                "acceptVariable": true,
+                "generateInstruction": true,
+                "rows": 4
+              }
+            ],
+            "id": "agentAgentflow_0-input-agentMessages-array",
+            "display": true
+          },
+          {
+            "label": "Tools",
+            "name": "agentTools",
+            "type": "array",
+            "optional": true,
+            "array": [
+              {
+                "label": "Tool",
+                "name": "agentSelectedTool",
+                "type": "asyncOptions",
+                "loadMethod": "listTools",
+                "loadConfig": true
+              },
+              {
+                "label": "Require Human Input",
+                "name": "agentSelectedToolRequiresHumanInput",
+                "type": "boolean",
+                "optional": true
+              }
+            ],
+            "id": "agentAgentflow_0-input-agentTools-array",
+            "display": true
+          },
+          {
+            "label": "Knowledge (Document Stores)",
+            "name": "agentKnowledgeDocumentStores",
+            "type": "array",
+            "description": "Give your agent context about different document sources. Document stores must be upserted in advance.",
+            "array": [
+              {
+                "label": "Document Store",
+                "name": "documentStore",
+                "type": "asyncOptions",
+                "loadMethod": "listStores"
+              },
+              {
+                "label": "Describe Knowledge",
+                "name": "docStoreDescription",
+                "type": "string",
+                "generateDocStoreDescription": true,
+                "placeholder": "Describe what the knowledge base is about",
+                "rows": 4
+              },
+              {
+                "label": "Return Source Documents",
+                "name": "returnSourceDocuments",
+                "type": "boolean",
+                "optional": true
+              }
+            ],
+            "optional": true,
+            "id": "agentAgentflow_0-input-agentKnowledgeDocumentStores-array",
+            "display": true
+          },
+          {
+            "label": "Knowledge (Vector Embeddings)",
+            "name": "agentKnowledgeVSEmbeddings",
+            "type": "array",
+            "description": "Give your agent context about different document sources from existing vector stores and embeddings",
+            "array": [
+              {
+                "label": "Vector Store",
+                "name": "vectorStore",
+                "type": "asyncOptions",
+                "loadMethod": "listVectorStores",
+                "loadConfig": true
+              },
+              {
+                "label": "Embedding Model",
+                "name": "embeddingModel",
+                "type": "asyncOptions",
+                "loadMethod": "listEmbeddings",
+                "loadConfig": true
+              },
+              {
+                "label": "Knowledge Name",
+                "name": "knowledgeName",
+                "type": "string",
+                "placeholder": "A short name for the knowledge base"
+              },
+              {
+                "label": "Describe Knowledge",
+                "name": "knowledgeDescription",
+                "type": "string",
+                "placeholder": "Describe what the knowledge base is about",
+                "rows": 4
+              },
+              {
+                "label": "Return Source Documents",
+                "name": "returnSourceDocuments",
+                "type": "boolean",
+                "optional": true
+              }
+            ],
+            "optional": true,
+            "id": "agentAgentflow_0-input-agentKnowledgeVSEmbeddings-array",
+            "display": true
+          },
+          {
+            "label": "Enable Memory",
+            "name": "agentEnableMemory",
+            "type": "boolean",
+            "description": "Enable memory for the conversation thread",
+            "default": true,
+            "optional": true,
+            "id": "agentAgentflow_0-input-agentEnableMemory-boolean",
+            "display": true
+          },
+          {
+            "label": "Memory Type",
+            "name": "agentMemoryType",
+            "type": "options",
+            "options": [
+              {
+                "label": "All Messages",
+                "name": "allMessages"
+              },
+              {
+                "label": "Window Size",
+                "name": "windowSize"
+              },
+              {
+                "label": "Conversation Summary",
+                "name": "conversationSummary"
+              },
+              {
+                "label": "Conversation Summary Buffer",
+                "name": "conversationSummaryBuffer"
+              }
+            ],
+            "optional": true,
+            "default": "allMessages",
+            "show": {
+              "agentEnableMemory": true
+            },
+            "id": "agentAgentflow_0-input-agentMemoryType-options",
+            "display": true
+          },
+          {
+            "label": "Window Size",
+            "name": "agentMemoryWindowSize",
+            "type": "number",
+            "default": "20",
+            "description": "Uses a fixed window size to surface the last N messages",
+            "show": {
+              "agentMemoryType": "windowSize"
+            },
+            "id": "agentAgentflow_0-input-agentMemoryWindowSize-number",
+            "display": false
+          },
+          {
+            "label": "Max Token Limit",
+            "name": "agentMemoryMaxTokenLimit",
+            "type": "number",
+            "default": "2000",
+            "description": "Summarize conversations once token limit is reached. Default to 2000",
+            "show": {
+              "agentMemoryType": "conversationSummaryBuffer"
+            },
+            "id": "agentAgentflow_0-input-agentMemoryMaxTokenLimit-number",
+            "display": false
+          },
+          {
+            "label": "Input Message",
+            "name": "agentUserMessage",
+            "type": "string",
+            "description": "Add an input message as user message at the end of the conversation",
+            "rows": 4,
+            "optional": true,
+            "acceptVariable": true,
+            "show": {
+              "agentEnableMemory": true
+            },
+            "id": "agentAgentflow_0-input-agentUserMessage-string",
+            "display": true
+          },
+          {
+            "label": "Return Response As",
+            "name": "agentReturnResponseAs",
+            "type": "options",
+            "options": [
+              {
+                "label": "User Message",
+                "name": "userMessage"
+              },
+              {
+                "label": "Assistant Message",
+                "name": "assistantMessage"
+              }
+            ],
+            "default": "userMessage",
+            "id": "agentAgentflow_0-input-agentReturnResponseAs-options",
+            "display": true
+          },
+          {
+            "label": "Update Flow State",
+            "name": "agentUpdateState",
+            "description": "Update runtime state during the execution of the workflow",
+            "type": "array",
+            "optional": true,
+            "acceptVariable": true,
+            "array": [
+              {
+                "label": "Key",
+                "name": "key",
+                "type": "asyncOptions",
+                "loadMethod": "listRuntimeStateKeys",
+                "freeSolo": true
+              },
+              {
+                "label": "Value",
+                "name": "value",
+                "type": "string",
+                "acceptVariable": true,
+                "acceptNodeOutputAsVariable": true
+              }
+            ],
+            "id": "agentAgentflow_0-input-agentUpdateState-array",
+            "display": true
+          }
+        ],
+        "inputAnchors": [],
+        "inputs": {
+          "agentModel": "groqChat",
+          "agentMessages": [
+            {
+              "role": "system",
+              "content": "You are a Technical Builder Agent. Write, modify, debug and test code. Produce complete runnable code, explain briefly, do not use web search."
+            }
+          ],
+          "agentTools": "",
+          "agentKnowledgeDocumentStores": "",
+          "agentEnableMemory": true,
+          "agentMemoryType": "allMessages",
+          "agentUserMessage": "POC Name: {{$form.pocName}}\n\nPOC Objective: {{$form.pocObjective}}\n\nPOC Type: {{$form.pocType}}\n\nStakeholders: {{$form.stakeholders}}\n\nTimeline: {{$form.timeline}} days\n\n---\n\nPOC Plan: {{$flow.state.pocPlan}}\n\nCurrent Findings: {{$flow.state.findings}}\n\nValidation Results: {{$flow.state.validationResults}}\n\n---\n\nAssigned Task:\n\nAgent Type: {{$iteration.agentType}}\n\nTask: {{$iteration.task}}\n\nSuccess Criteria: {{$iteration.successCriteria}}\n\nExecute your assigned task based on your specific agent role (Planner, Builder, Validator, or Monitor). Be thorough and include all relevant documentation, analysis, and recommendations. If the task is unclear or incomplete, state what additional information you would need and suggest how to get it.",
+          "agentReturnResponseAs": "userMessage",
+          "agentUpdateState": [
+            {
+              "key": "findings",
+              "value": "<p><span class=\"variable\" data-type=\"mention\" data-id=\"$flow.state.findings\" data-label=\"$flow.state.findings\" data-mention-suggestion-char=\"@\">{{ $flow.state.findings }}</span> --- ## {{$iteration.agentType}} Agent Findings **Task:** {{$iteration.task}} **Success Criteria:** {{$iteration.successCriteria}} **Results:** <span class=\"variable\" data-type=\"mention\" data-id=\"output\" data-label=\"output\" data-mention-suggestion-char=\"@\">{{ output }}</span></p>"
+            },
+            {
+              "key": "executionLog",
+              "value": "<p><span class=\"variable\" data-type=\"mention\" data-id=\"$flow.state.executionLog\" data-label=\"$flow.state.executionLog\" data-mention-suggestion-char=\"@\">{{ $flow.state.executionLog }}</span> [{{$iteration.agentType}}] Task completed: {{$iteration.task}}</p>"
+            }
+          ],
+          "agentModelConfig": {
+            "credential": "",
+            "modelName": "llama-3.3-70b-versatile",
+            "temperature": 0.7,
+            "maxTokens": "",
+            "streaming": true,
+            "agentModel": "groqChat"
+          }
+        },
+        "outputAnchors": [
+          {
+            "id": "agentAgentflow_0-output-agentAgentflow",
+            "label": "Agent",
+            "name": "agentAgentflow"
+          }
+        ],
+        "outputs": {},
+        "selected": false
+      },
+      "type": "agentFlow",
+      "parentNode": "iterationAgentflow_0",
+      "extent": "parent",
+      "width": 237,
+      "height": 101,
+      "selected": false,
+      "positionAbsolute": {
+        "x": 267.0033202297088,
+        "y": 105.1875521971935
+      },
+      "dragging": false
+    },
+    {
+      "id": "stickyNoteAgentflow_1",
+      "position": {
+        "x": 301.9634876685415,
+        "y": -126.23402521777831
+      },
+      "data": {
+        "id": "stickyNoteAgentflow_1",
+        "label": "Sticky Note (1)",
+        "version": 1,
+        "name": "stickyNoteAgentflow",
+        "type": "StickyNote",
+        "color": "#fee440",
+        "baseClasses": [
+          "StickyNote"
+        ],
+        "category": "Agent Flows",
+        "description": "Add notes to the agent flow",
+        "inputParams": [
+          {
+            "label": "",
+            "name": "note",
+            "type": "string",
+            "rows": 1,
+            "placeholder": "Type something here",
+            "optional": true,
+            "id": "stickyNoteAgentflow_1-input-note-string",
+            "display": true
+          }
+        ],
+        "inputAnchors": [],
+        "inputs": {
+          "note": "Each specialist agent executes its assigned task based on its role (Planner, Builder, Validator, Monitor) and appends findings to the flow state."
+        },
+        "outputAnchors": [
+          {
+            "id": "stickyNoteAgentflow_1-output-stickyNoteAgentflow",
+            "label": "Sticky Note",
+            "name": "stickyNoteAgentflow"
+          }
+        ],
+        "outputs": {},
+        "selected": false
+      },
+      "type": "stickyNote",
+      "width": 204,
+      "height": 123,
+      "selected": false,
+      "positionAbsolute": {
+        "x": 301.9634876685415,
+        "y": -126.23402521777831
+      },
+      "dragging": false
+    },
+    {
+      "id": "conditionAgentAgentflow_0",
+      "position": {
+        "x": 583.9585073239784,
+        "y": 46.626555720467366
+      },
+      "data": {
+        "id": "conditionAgentAgentflow_0",
+        "label": "Validate Completion",
+        "version": 1.1,
+        "name": "conditionAgentAgentflow",
+        "type": "ConditionAgent",
+        "color": "#ff8fab",
+        "baseClasses": [
+          "ConditionAgent"
+        ],
+        "category": "Agent Flows",
+        "description": "Utilize an agent to split flows based on dynamic conditions",
+        "inputParams": [
+          {
+            "label": "Model",
+            "name": "conditionAgentModel",
+            "type": "asyncOptions",
+            "loadMethod": "listModels",
+            "loadConfig": true,
+            "id": "conditionAgentAgentflow_0-input-conditionAgentModel-asyncOptions",
+            "display": true
+          },
+          {
+            "label": "Instructions",
+            "name": "conditionAgentInstructions",
+            "type": "string",
+            "description": "A general instructions of what the condition agent should do",
+            "rows": 4,
+            "acceptVariable": true,
+            "placeholder": "Determine if the POC is complete or needs iteration",
+            "id": "conditionAgentAgentflow_0-input-conditionAgentInstructions-string",
+            "display": true
+          },
+          {
+            "label": "Input",
+            "name": "conditionAgentInput",
+            "type": "string",
+            "description": "Input to be used for the condition agent",
+            "rows": 4,
+            "acceptVariable": true,
+            "default": "<p><span class=\"variable\" data-type=\"mention\" data-id=\"question\" data-label=\"question\">{{ question }}</span> </p>",
+            "id": "conditionAgentAgentflow_0-input-conditionAgentInput-string",
+            "display": true
+          },
+          {
+            "label": "Scenarios",
+            "name": "conditionAgentScenarios",
+            "description": "Define the scenarios that will be used as the conditions to split the flow",
+            "type": "array",
+            "array": [
+              {
+                "label": "Scenario",
+                "name": "scenario",
+                "type": "string",
+                "placeholder": "POC is complete"
+              }
+            ],
+            "default": [
+              {
+                "scenario": "POC needs further iteration"
+              },
+              {
+                "scenario": "POC is complete and ready for delivery"
+              }
+            ],
+            "id": "conditionAgentAgentflow_0-input-conditionAgentScenarios-array",
+            "display": true
+          },
+          {
+            "label": "Override System Prompt",
+            "name": "conditionAgentOverrideSystemPrompt",
+            "type": "boolean",
+            "description": "Override initial system prompt for Condition Agent",
+            "optional": true,
+            "id": "conditionAgentAgentflow_0-input-conditionAgentOverrideSystemPrompt-boolean",
+            "display": true
+          },
+          {
+            "label": "Node System Prompt",
+            "name": "conditionAgentSystemPrompt",
+            "type": "string",
+            "rows": 4,
+            "optional": true,
+            "acceptVariable": true,
+            "default": "<p>You are part of a multi-agent system designed to make agent coordination and execution easy. Your task is to analyze the given input and select one matching scenario from a provided set of scenarios.</p>\n    <ul>\n        <li><strong>Input</strong>: A string representing the user's query, message or data.</li>\n        <li><strong>Scenarios</strong>: A list of predefined scenarios that relate to the input.</li>\n        <li><strong>Instruction</strong>: Determine which of the provided scenarios is the best fit for the input.</li>\n    </ul>\n    <h2>Steps</h2>\n    <ol>\n        <li><strong>Read the input string</strong> and the list of scenarios.</li>\n        <li><strong>Analyze the content of the input</strong> to identify its main topic or intention.</li>\n        <li><strong>Compare the input with each scenario</strong>: Evaluate how well the input's topic or intention aligns with each of the provided scenarios and select the one that is the best fit.</li>\n        <li><strong>Output the result</strong>: Return the selected scenario in the specified JSON format.</li>\n    </ol>\n    <h2>Output Format</h2>\n    <p>Output should be a JSON object that names the selected scenario, like this: <code>{\"output\": \"<selected_scenario_name>\"}</code>. No explanation is needed.</p>",
+            "description": "Expert use only. Modifying this can significantly alter agent behavior. Leave default if unsure",
+            "show": {
+              "conditionAgentOverrideSystemPrompt": true
+            },
+            "id": "conditionAgentAgentflow_0-input-conditionAgentSystemPrompt-string",
+            "display": false
+          }
+        ],
+        "inputAnchors": [],
+        "inputs": {
+          "conditionAgentModel": "groqChat",
+          "conditionAgentInstructions": "You are the POC Completion Validator. Determine if the POC is complete based on SUCCESS METRICS and VALIDATION RESULTS.\n\nCOMPLETION CRITERIA (MUST CHECK ALL):\n\n1. All assigned subagent tasks are marked as \"COMPLETED\" in the execution log\n\n2. Validation Results show a PASS rate of \u2265 90% for all test cases\n\n3. No CRITICAL or HIGH severity issues remain unresolved\n\n4. All core success criteria from planning phase have been verified\n\n5. Documentation is complete (findings, logs, validation reports)\n\nDECISION RULES:\n\n- IF ALL 5 criteria are met \u2192 \"POC is complete and ready for delivery\"\n\n- IF ANY criterion is NOT met \u2192 \"POC needs further iteration\"\n\nIMPORTANT: The output must be EXACTLY one of these two phrases, nothing else.",
+          "conditionAgentInput": "POC Name: {{$form.pocName}}\n\nPOC Objective: {{$form.pocObjective}}\n\n---\n\nPOC Plan: {{$flow.state.pocPlan}}\n\nFindings: {{$flow.state.findings}}\n\nValidation Results: {{$flow.state.validationResults}}\n\nExecution Log: {{$flow.state.executionLog}}\n\n---\n\nEvaluate if the POC:\n\n1. Has met all defined success criteria\n2. Has been properly validated for quality and compliance\n3. Has addressed all identified risks\n4. Has documented audit trails\n\nIf all criteria are met, mark as complete. If any gaps remain, indicate that further iteration is needed.",
+          "conditionAgentScenarios": [
+            {
+              "scenario": "POC needs further iteration"
+            },
+            {
+              "scenario": "POC is complete and ready for delivery"
+            }
+          ],
+          "conditionAgentOverrideSystemPrompt": "",
+          "conditionAgentModelConfig": {
+            "credential": "",
+            "modelName": "llama-3.3-70b-versatile",
+            "temperature": "0",
+            "maxTokens": "",
+            "streaming": true,
+            "conditionAgentModel": "groqChat"
+          },
+          "undefined": ""
+        },
+        "outputAnchors": [
+          {
+            "id": "conditionAgentAgentflow_0-output-0",
+            "label": "Condition Agent",
+            "name": "conditionAgentAgentflow"
+          },
+          {
+            "id": "conditionAgentAgentflow_0-output-1",
+            "label": "Condition Agent",
+            "name": "conditionAgentAgentflow"
+          }
+        ],
+        "outputs": {
+          "conditionAgentAgentflow": ""
+        },
+        "selected": false
+      },
+      "type": "agentFlow",
+      "width": 237,
+      "height": 80,
+      "selected": false,
+      "positionAbsolute": {
+        "x": 583.9585073239784,
+        "y": 46.626555720467366
+      },
+      "dragging": false
+    },
+    {
+      "id": "loopAgentflow_0",
+      "position": {
+        "x": 900.1684659740371,
+        "y": -87.70207565333487
+      },
+      "data": {
+        "id": "loopAgentflow_0",
+        "label": "Iterate POC",
+        "version": 1,
+        "name": "loopAgentflow",
+        "type": "Loop",
+        "color": "#FFA07A",
+        "hideOutput": true,
+        "baseClasses": [
+          "Loop"
+        ],
+        "category": "Agent Flows",
+        "description": "Loop back to a previous node",
+        "inputParams": [
+          {
+            "label": "Loop Back To",
+            "name": "loopBackToNode",
+            "type": "asyncOptions",
+            "loadMethod": "listPreviousNodes",
+            "freeSolo": true,
+            "id": "loopAgentflow_0-input-loopBackToNode-asyncOptions",
+            "display": true
+          },
+          {
+            "label": "Max Loop Count",
+            "name": "maxLoopCount",
+            "type": "number",
+            "default": 5,
+            "id": "loopAgentflow_0-input-maxLoopCount-number",
+            "display": true
+          }
+        ],
+        "inputAnchors": [],
+        "inputs": {
+          "loopBackToNode": "llmAgentflow_0-Orchestrator",
+          "maxLoopCount": "3"
+        },
+        "outputAnchors": [],
+        "outputs": {},
+        "selected": false
+      },
+      "type": "agentFlow",
+      "width": 147,
+      "height": 66,
+      "selected": false,
+      "positionAbsolute": {
+        "x": 900.1684659740371,
+        "y": -87.70207565333487
+      },
+      "dragging": false
+    },
+    {
+      "id": "agentAgentflow_1",
+      "position": {
+        "x": 920.1925325417566,
+        "y": 129.5112032264326
+      },
+      "data": {
+        "id": "agentAgentflow_1",
+        "label": "Deliver POC",
+        "version": 1,
+        "name": "agentAgentflow",
+        "type": "Agent",
+        "color": "#4DDBBB",
+        "baseClasses": [
+          "Agent"
+        ],
+        "category": "Agent Flows",
+        "description": "Dynamically choose and utilize tools during runtime, enabling multi-step reasoning",
+        "inputParams": [
+          {
+            "label": "Model",
+            "name": "agentModel",
+            "type": "asyncOptions",
+            "loadMethod": "listModels",
+            "loadConfig": true,
+            "id": "agentAgentflow_1-input-agentModel-asyncOptions",
+            "display": true
+          },
+          {
+            "label": "Messages",
+            "name": "agentMessages",
+            "type": "array",
+            "optional": true,
+            "acceptVariable": true,
+            "array": [
+              {
+                "label": "Role",
+                "name": "role",
+                "type": "options",
+                "options": [
+                  {
+                    "label": "System",
+                    "name": "system"
+                  },
+                  {
+                    "label": "Assistant",
+                    "name": "assistant"
+                  },
+                  {
+                    "label": "Developer",
+                    "name": "developer"
+                  },
+                  {
+                    "label": "User",
+                    "name": "user"
+                  }
+                ]
+              },
+              {
+                "label": "Content",
+                "name": "content",
+                "type": "string",
+                "acceptVariable": true,
+                "generateInstruction": true,
+                "rows": 4
+              }
+            ],
+            "id": "agentAgentflow_1-input-agentMessages-array",
+            "display": true
+          },
+          {
+            "label": "Tools",
+            "name": "agentTools",
+            "type": "array",
+            "optional": true,
+            "array": [
+              {
+                "label": "Tool",
+                "name": "agentSelectedTool",
+                "type": "asyncOptions",
+                "loadMethod": "listTools",
+                "loadConfig": true
+              },
+              {
+                "label": "Require Human Input",
+                "name": "agentSelectedToolRequiresHumanInput",
+                "type": "boolean",
+                "optional": true
+              }
+            ],
+            "id": "agentAgentflow_1-input-agentTools-array",
+            "display": true
+          },
+          {
+            "label": "Knowledge (Document Stores)",
+            "name": "agentKnowledgeDocumentStores",
+            "type": "array",
+            "description": "Give your agent context about different document sources. Document stores must be upserted in advance.",
+            "array": [
+              {
+                "label": "Document Store",
+                "name": "documentStore",
+                "type": "asyncOptions",
+                "loadMethod": "listStores"
+              },
+              {
+                "label": "Describe Knowledge",
+                "name": "docStoreDescription",
+                "type": "string",
+                "generateDocStoreDescription": true,
+                "placeholder": "Describe what the knowledge base is about",
+                "rows": 4
+              },
+              {
+                "label": "Return Source Documents",
+                "name": "returnSourceDocuments",
+                "type": "boolean",
+                "optional": true
+              }
+            ],
+            "optional": true,
+            "id": "agentAgentflow_1-input-agentKnowledgeDocumentStores-array",
+            "display": true
+          },
+          {
+            "label": "Knowledge (Vector Embeddings)",
+            "name": "agentKnowledgeVSEmbeddings",
+            "type": "array",
+            "description": "Give your agent context about different document sources from existing vector stores and embeddings",
+            "array": [
+              {
+                "label": "Vector Store",
+                "name": "vectorStore",
+                "type": "asyncOptions",
+                "loadMethod": "listVectorStores",
+                "loadConfig": true
+              },
+              {
+                "label": "Embedding Model",
+                "name": "embeddingModel",
+                "type": "asyncOptions",
+                "loadMethod": "listEmbeddings",
+                "loadConfig": true
+              },
+              {
+                "label": "Knowledge Name",
+                "name": "knowledgeName",
+                "type": "string",
+                "placeholder": "A short name for the knowledge base"
+              },
+              {
+                "label": "Describe Knowledge",
+                "name": "knowledgeDescription",
+                "type": "string",
+                "placeholder": "Describe what the knowledge base is about",
+                "rows": 4
+              },
+              {
+                "label": "Return Source Documents",
+                "name": "returnSourceDocuments",
+                "type": "boolean",
+                "optional": true
+              }
+            ],
+            "optional": true,
+            "id": "agentAgentflow_1-input-agentKnowledgeVSEmbeddings-array",
+            "display": true
+          },
+          {
+            "label": "Enable Memory",
+            "name": "agentEnableMemory",
+            "type": "boolean",
+            "description": "Enable memory for the conversation thread",
+            "default": true,
+            "optional": true,
+            "id": "agentAgentflow_1-input-agentEnableMemory-boolean",
+            "display": true
+          },
+          {
+            "label": "Memory Type",
+            "name": "agentMemoryType",
+            "type": "options",
+            "options": [
+              {
+                "label": "All Messages",
+                "name": "allMessages"
+              },
+              {
+                "label": "Window Size",
+                "name": "windowSize"
+              },
+              {
+                "label": "Conversation Summary",
+                "name": "conversationSummary"
+              },
+              {
+                "label": "Conversation Summary Buffer",
+                "name": "conversationSummaryBuffer"
+              }
+            ],
+            "optional": true,
+            "default": "allMessages",
+            "show": {
+              "agentEnableMemory": true
+            },
+            "id": "agentAgentflow_1-input-agentMemoryType-options",
+            "display": true
+          },
+          {
+            "label": "Window Size",
+            "name": "agentMemoryWindowSize",
+            "type": "number",
+            "default": "20",
+            "description": "Uses a fixed window size to surface the last N messages",
+            "show": {
+              "agentMemoryType": "windowSize"
+            },
+            "id": "agentAgentflow_1-input-agentMemoryWindowSize-number",
+            "display": false
+          },
+          {
+            "label": "Max Token Limit",
+            "name": "agentMemoryMaxTokenLimit",
+            "type": "number",
+            "default": "2000",
+            "description": "Summarize conversations once token limit is reached. Default to 2000",
+            "show": {
+              "agentMemoryType": "conversationSummaryBuffer"
+            },
+            "id": "agentAgentflow_1-input-agentMemoryMaxTokenLimit-number",
+            "display": false
+          },
+          {
+            "label": "Input Message",
+            "name": "agentUserMessage",
+            "type": "string",
+            "description": "Add an input message as user message at the end of the conversation",
+            "rows": 4,
+            "optional": true,
+            "acceptVariable": true,
+            "show": {
+              "agentEnableMemory": true
+            },
+            "id": "agentAgentflow_1-input-agentUserMessage-string",
+            "display": true
+          },
+          {
+            "label": "Return Response As",
+            "name": "agentReturnResponseAs",
+            "type": "options",
+            "options": [
+              {
+                "label": "User Message",
+                "name": "userMessage"
+              },
+              {
+                "label": "Assistant Message",
+                "name": "assistantMessage"
+              }
+            ],
+            "default": "userMessage",
+            "id": "agentAgentflow_1-input-agentReturnResponseAs-options",
+            "display": true
+          },
+          {
+            "label": "Update Flow State",
+            "name": "agentUpdateState",
+            "description": "Update runtime state during the execution of the workflow",
+            "type": "array",
+            "optional": true,
+            "acceptVariable": true,
+            "array": [
+              {
+                "label": "Key",
+                "name": "key",
+                "type": "asyncOptions",
+                "loadMethod": "listRuntimeStateKeys",
+                "freeSolo": true
+              },
+              {
+                "label": "Value",
+                "name": "value",
+                "type": "string",
+                "acceptVariable": true,
+                "acceptNodeOutputAsVariable": true
+              }
+            ],
+            "id": "agentAgentflow_1-input-agentUpdateState-array",
+            "display": true
+          }
+        ],
+        "inputAnchors": [],
+        "inputs": {
+          "agentModel": "groqChat",
+          "agentMessages": [
+            {
+              "role": "system",
+              "content": "You are the POC Delivery Agent. Your job is to synthesize all findings, validation results, and execution logs into a comprehensive POC deliverable document.\n\nFormat the deliverable as a well-structured Markdown document with the following sections:\n\n1. **Executive Summary** - Brief overview of the POC, its objectives, and key outcomes\n2. **Requirements & Success Criteria** - What was required and how it was validated\n3. **Architecture & Approach** - Technical approach and design decisions\n4. **Implementation Details** - Key components built and how they work\n5. **Test Results & Validation** - Results of all tests and validation activities\n6. **Risk Assessment & Mitigation** - Identified risks and how they were addressed\n7. **Lessons Learned** - Key takeaways and recommendations\n8. **Next Steps** - Recommendations for production implementation\n9. **Appendices** - Detailed logs, configurations, and additional documentation\n\nEnsure all sources are cited, all validation results are properly presented, and the deliverable is suitable for stakeholder presentation. Do not fabricate results or omit critical gaps - be honest about limitations and areas for improvement."
+            },
+            {
+              "role": "user",
+              "content": "POC Name: {{$form.pocName}}\n\nPOC Objective: {{$form.pocObjective}}\n\nPOC Type: {{$form.pocType}}\n\nStakeholders: {{$form.stakeholders}}\n\nTimeline: {{$form.timeline}} days\n\n---\n\nPOC Plan:\n{{$flow.state.pocPlan}}\n\n---\n\nFindings Summary:\n{{$flow.state.findings}}\n\n---\n\nValidation Results:\n{{$flow.state.validationResults}}\n\n---\n\nExecution Log:\n{{$flow.state.executionLog}}\n\n---\n\nSynthesize the information above into the structured POC deliverable described in your system instructions. Be comprehensive, honest about any limitations, and provide clear recommendations for next steps."
+            }
+          ],
+          "agentTools": "",
+          "agentKnowledgeDocumentStores": "",
+          "agentEnableMemory": false,
+          "agentReturnResponseAs": "userMessage",
+          "agentUpdateState": [
+            {
+              "key": "findings",
+              "value": "<p><span class=\"variable\" data-type=\"mention\" data-id=\"output\" data-label=\"output\" data-mention-suggestion-char=\"@\">{{ output }}</span></p>"
+            },
+            {
+              "key": "pocStatus",
+              "value": "<p>delivered</p>"
+            }
+          ],
+          "agentModelConfig": {
+            "credential": "",
+            "modelName": "llama-3.3-70b-versatile",
+            "temperature": "0.7",
+            "maxTokens": "",
+            "streaming": true,
+            "agentModel": "groqChat"
+          }
+        },
+        "outputAnchors": [
+          {
+            "id": "agentAgentflow_1-output-agentAgentflow",
+            "label": "Agent",
+            "name": "agentAgentflow"
+          }
+        ],
+        "outputs": {},
+        "selected": false
+      },
+      "type": "agentFlow",
+      "width": 237,
+      "height": 73,
+      "selected": false,
+      "positionAbsolute": {
+        "x": 920.1925325417566,
+        "y": 129.5112032264326
+      },
+      "dragging": false
+    }
+  ],
+  "edges": [
+    {
+      "source": "startAgentflow_0",
+      "sourceHandle": "startAgentflow_0-output-startAgentflow",
+      "target": "llmAgentflow_0",
+      "targetHandle": "llmAgentflow_0",
+      "data": {
+        "sourceColor": "#7EE787",
+        "targetColor": "#64B5F6",
+        "isHumanInput": false
+      },
+      "type": "agentFlow",
+      "id": "startAgentflow_0-startAgentflow_0-output-startAgentflow-llmAgentflow_0-llmAgentflow_0"
+    },
+    {
+      "source": "llmAgentflow_0",
+      "sourceHandle": "llmAgentflow_0-output-llmAgentflow",
+      "target": "iterationAgentflow_0",
+      "targetHandle": "iterationAgentflow_0",
+      "data": {
+        "sourceColor": "#64B5F6",
+        "targetColor": "#9C89B8",
+        "isHumanInput": false
+      },
+      "type": "agentFlow",
+      "id": "llmAgentflow_0-llmAgentflow_0-output-llmAgentflow-iterationAgentflow_0-iterationAgentflow_0"
+    },
+    {
+      "source": "iterationAgentflow_0",
+      "sourceHandle": "iterationAgentflow_0-output-iterationAgentflow",
+      "target": "conditionAgentAgentflow_0",
+      "targetHandle": "conditionAgentAgentflow_0",
+      "data": {
+        "sourceColor": "#9C89B8",
+        "targetColor": "#ff8fab",
+        "isHumanInput": false
+      },
+      "type": "agentFlow",
+      "id": "iterationAgentflow_0-iterationAgentflow_0-output-iterationAgentflow-conditionAgentAgentflow_0-conditionAgentAgentflow_0"
+    },
+    {
+      "source": "conditionAgentAgentflow_0",
+      "sourceHandle": "conditionAgentAgentflow_0-output-0",
+      "target": "loopAgentflow_0",
+      "targetHandle": "loopAgentflow_0",
+      "data": {
+        "sourceColor": "#ff8fab",
+        "targetColor": "#FFA07A",
+        "edgeLabel": "0",
+        "isHumanInput": false
+      },
+      "type": "agentFlow",
+      "id": "conditionAgentAgentflow_0-conditionAgentAgentflow_0-output-0-loopAgentflow_0-loopAgentflow_0"
+    },
+    {
+      "source": "conditionAgentAgentflow_0",
+      "sourceHandle": "conditionAgentAgentflow_0-output-1",
+      "target": "agentAgentflow_1",
+      "targetHandle": "agentAgentflow_1",
+      "data": {
+        "sourceColor": "#ff8fab",
+        "targetColor": "#4DDBBB",
+        "edgeLabel": "1",
+        "isHumanInput": false
+      },
+      "type": "agentFlow",
+      "id": "conditionAgentAgentflow_0-conditionAgentAgentflow_0-output-1-agentAgentflow_1-agentAgentflow_1"
+    }
+  ]
+}
